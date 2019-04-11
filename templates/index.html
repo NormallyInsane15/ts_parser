@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    {% extends "bootstrap/base.html" %}
+    {% block title %}内容格式封装验证平台{% endblock %}
+</head>
+
+{% block content %}
+<style>
+    .textarea{
+        width: 100%;
+        overflow: auto;
+        word-break: break-all;  //解决兼容性问题
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+<div class="container">
+
+    <div>
+        <h2 align="center">内容格式封装验证平台</h2>
+    </div>
+
+    <div class="row">
+        <div class="navbar navbar-default">
+            <ul class="nav nav-pills nav-justified">
+                <li class="active"><a href="#tab1" data-toggle="tab">TS流解析</a></li>
+                <li><a href="#tab2" data-toggle="tab">HLS解析</a></li>
+                <li><a href="#tab2" data-toggle="tab">DASH解析</a></li>
+            </ul>
+        </div>
+
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="tab1">
+
+                <div class="col-xs-5">
+                    <div class="row">
+                        <form class="form-inline" action="" enctype='multipart/form-data' method='POST'>
+                            <div class="form-group">
+                                <label for="ipinput">源IP地址</label>
+                                <input type="text" name="sourseip" id="ipinput" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="获取" class="form-control btn btn-primary">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option class="select">AVS2</option>
+                                    <option>H265</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <form class="form-inline" action="" enctype='multipart/form-data' method='POST'>
+                            <div class="form-group">
+                                <label for="fileinput">源文件</label>
+                                <input type="file" name="file" id="fileinput" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="解析" class="form-control btn btn-primary">
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option class="select">AVS2</option>
+                                    <option>H265</option>
+                                </select>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="row">
+                        <h5>PAT表</h5>
+                        <textarea rows="4" readonly class="textarea">{% for item in prog %}program_number：{{ item.program_number }}&nbsp;&nbsp;PMT_PID:{{ item.PMT_PID }}
+{% endfor %}
+                        </textarea><br>
+                    </div>
+
+                    <div class="row">
+                        <h5>PMT表</h5>
+                        <textarea rows="4" readonly class="textarea">{% for item in stream %}stream_type:{{ item.stream_type }}&nbsp;&nbsp;elementary_PID:{{ item.elementary_PID }}&nbsp;&nbsp;ES_info_length:{{ item.ES_info_length }}
+{% endfor %}
+                    </textarea><br>
+                    </div>
+
+                    <div class="row">
+                        <h5>ChinaDRM描述子信息</h5>
+                        <textarea rows="4" readonly class="textarea">{{descriptor}}</textarea><br>
+                    </div>
+
+                    <div class="row">
+                        <h5>内容加密信息CEI</h5>
+                        <textarea rows="4" readonly class="textarea">{{cei}}</textarea><br>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-6 pull-right" style="background:black;height:400px">
+                   <video width="100%" height="100%" controls>
+                        <source src="" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+             <div class=" tab-pane" id="tab2">
+                <h5>待扩展</h5>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+</html>
